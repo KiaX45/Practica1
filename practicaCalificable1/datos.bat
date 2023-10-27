@@ -4,7 +4,7 @@ echo Ingresa el nombre del archivo
 set /p archivo=
 
 if exist %archivo% (
-    echo el archivo ya existe 
+    echo el archivo ya existe
     exit /b 1
 ) else (
     echo %date% %time% %systeminfo% > %archivo%.txt

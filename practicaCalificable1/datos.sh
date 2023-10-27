@@ -7,7 +7,7 @@ read nombreArchivo
 
 #Comprobamos si no hay un documento con el mismo nombre
 if [[ -f "$nombreArchivo.txt" ]];  then
-echo "Lo sentimos no se puede continuar porque ya existe"
+echo "Lo sentimos no se puede continuar porque ya existe un documento con este nombre"
 exit 1
 fi
 
