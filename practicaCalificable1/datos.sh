@@ -1,19 +1,34 @@
 #!/bin/bash
-echo"Este script permite generar la fecha y hora actual junto con la información del s>
 
-echo "Ingrese el nombre del archivo donde se guardara la información"
-read nombreArchivo
+echo "Este script permite la creación de un documento con los datos de fecha y hora y la información del sistema."
+
+while true; do
+    echo "Ingresa el nombre del archivo:"
+    read archivo
+
+    if [[ -e "$archivo.txt" ]]; then
+        echo "El archivo ya existe."
+        read -p "¿Deseas introducir un nuevo nombre? [y/n]: " respuesta
+        respuesta=${respuesta,,}  # Convertir a minúsculas
+
+        if [[ "$respuesta" == "y" ]]; then
+            continue
+        elif [[ "$respuesta" == "n" ]]; then
+            echo "Salida del script."
+            exit
+        else
+            echo "Por favor, responde y o n."
+        fi
+    else
+        date > "$archivo.txt"
+        cat /etc/os-release >> "$archivo.txt"
+        lscpu >> "$archivo.txt"
+        echo "Archivo creado."
+        echo "Mostrando el contenido del archivo:"
+        cat "$archivo.txt"
+        break
+    fi
+done
 
 
-#Comprobamos si no hay un documento con el mismo nombre
-if [[ -f "$nombreArchivo.txt" ]];  then
-echo "Lo sentimos no se puede continuar porque ya existe un documento con este nombre"
-exit 1
-fi
 
-#creamos el documento donde se guardara 
-touch "$nombreArchivo.txt"
-
-date > "$nombreArchivo.txt"
-/etc/os-relaese >> "$nombreArchivo.txt"
-lscpu >> "$nombreArchivo.txt"
